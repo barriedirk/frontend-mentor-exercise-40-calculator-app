@@ -3,6 +3,8 @@
 *.fig
 *.xd
 
+figma
+
 # Dependencies
 /node_modules
 /.pnp

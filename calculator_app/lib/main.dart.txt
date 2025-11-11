@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'core/theme/app_theme.dart';
 import 'presentation/pages/calculator_page.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'presentation/controllers/theme_controller.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeController(),
-      child: const MainApp(),
-    ),
-  );
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -18,12 +14,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = context.watch<ThemeController>().theme;
-
     return MaterialApp(
       title: 'Calculator App',
-      theme: theme,
-      home: const CalculatorPage(),
+      theme: AppTheme.lightTheme,
+      home: const Scaffold(body: Center(child: CalculatorPage())),
       debugShowCheckedModeBanner: false,
     );
   }

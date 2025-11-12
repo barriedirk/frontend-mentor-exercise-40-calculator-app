@@ -1,4 +1,6 @@
+import 'package:calculator_app/presentation/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:calculator_app/core/utils/calculate_width.dart';
@@ -10,26 +12,44 @@ class Display extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.watch<ThemeController>().theme;
+
     final controller = context.watch<CalculatorController>();
     final screenWidth = MediaQuery.of(context).size.width;
     final finalWidth = calculateWidth(screenWidth);
 
     return Container(
       width: finalWidth,
-      height: 128,
+      height: 30,
       alignment: Alignment.bottomRight,
-      padding: const EdgeInsets.all(24),
+      padding: const EdgeInsets.all(4),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 169, 214, 213),
+        color: theme.colorScheme.primaryContainer,
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(controller.input, style: AppTextStyles.button),
+          Text(
+            controller.input,
+            style: GoogleFonts.leagueSpartan(
+              fontSize: 56,
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.primary,
+              letterSpacing: -1,
+            ),
+          ),
           const SizedBox(height: 10),
-          Text(controller.output, style: AppTextStyles.display),
+          Text(
+            controller.output,
+            style: GoogleFonts.leagueSpartan(
+              fontSize: 56,
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.primary,
+              letterSpacing: -1,
+            ),
+          ),
         ],
       ),
     );

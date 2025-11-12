@@ -15,8 +15,8 @@ class ThemeSwitch extends StatelessWidget {
     final screenWidth = MediaQuery.of(context).size.width;
     final finalWidth = calculateWidth(screenWidth);
 
-    return Container(
-      height: 50,
+    return SizedBox(
+      height: 70,
       width: finalWidth,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -32,36 +32,67 @@ class ThemeSwitch extends StatelessWidget {
             ),
           ),
           SizedBox(width: 10),
-          Container(
-            height: 30,
-            width: 68,
-            padding: const EdgeInsets.all(50.0),
-            decoration: BoxDecoration(
-              color: Color.fromARGB(255, 169, 214, 213),
-              borderRadius: BorderRadius.all(Radius.circular(12.0)),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(3, (index) {
-                final isSelected = themeController.currentIndex == index;
+          Column(
+            children: [
+              Container(
+                height: 20,
+                width: 68,
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10.0,
+                  vertical: 4.0,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: List.generate(3, (index) {
+                    final indexText = (index + 1).toString();
 
-                return GestureDetector(
-                  onTap: () => themeController.setTheme(index),
-                  child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 200),
-                    margin: const EdgeInsets.symmetric(horizontal: 2),
-                    width: 16,
-                    height: 16,
-                    decoration: BoxDecoration(
-                      color: isSelected
-                          ? themeController.theme.colorScheme.primary
-                          : Colors.grey.shade400,
-                      shape: BoxShape.circle,
-                    ),
-                  ),
-                );
-              }),
-            ),
+                    return GestureDetector(
+                      onTap: () => themeController.setTheme(index),
+                      child: Text(
+                        indexText,
+                        style: GoogleFonts.leagueSpartan(
+                          fontSize: 12,
+                          fontWeight: FontWeight.bold,
+                          color: theme.colorScheme.primary,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+              SizedBox(height: 1),
+              Container(
+                height: 30,
+                width: 68,
+                padding: const EdgeInsets.all(4.0),
+                decoration: BoxDecoration(
+                  color: theme.colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: List.generate(3, (index) {
+                    final isSelected = themeController.currentIndex == index;
+
+                    return GestureDetector(
+                      onTap: () => themeController.setTheme(index),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        margin: const EdgeInsets.symmetric(horizontal: 2),
+                        width: 16,
+                        height: 16,
+                        decoration: BoxDecoration(
+                          color: isSelected
+                              ? Color(0xffD03F2F)
+                              : theme.colorScheme.primaryContainer,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    );
+                  }),
+                ),
+              ),
+            ],
           ),
         ],
       ),

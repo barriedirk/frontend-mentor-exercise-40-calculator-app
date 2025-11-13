@@ -12,12 +12,10 @@ class ThemeSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeController>().theme;
     final themeController = context.watch<ThemeController>();
-    final screenWidth = MediaQuery.of(context).size.width;
-    final finalWidth = calculateWidth(screenWidth);
 
     return SizedBox(
-      height: 70,
-      width: finalWidth,
+      height: 56,
+      width: 125,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

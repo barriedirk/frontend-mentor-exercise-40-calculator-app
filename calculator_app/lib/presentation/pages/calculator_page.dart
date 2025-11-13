@@ -15,15 +15,18 @@ class CalculatorPage extends StatelessWidget {
       create: (_) => CalculatorController(),
       child: Scaffold(
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              SizedBox(height: 30),
-
-              Header(),
-              Expanded(flex: 2, child: Display()),
-              Expanded(flex: 3, child: Keypad()),
-            ],
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: const [
+                SizedBox(height: 30),
+                Header(),
+                SizedBox(height: 20),
+                Display(),
+                SizedBox(height: 20),
+                Keypad(),
+              ],
+            ),
           ),
         ),
       ),

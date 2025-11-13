@@ -1,4 +1,5 @@
 import 'package:calculator_app/core/utils/calculate_width.dart';
+import 'package:calculator_app/presentation/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../core/constants/app_colors.dart';
@@ -10,23 +11,38 @@ class Keypad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = context.watch<ThemeController>().theme;
+
     final controller = context.read<CalculatorController>();
     final screenWidth = MediaQuery.of(context).size.width;
     final finalWidth = calculateWidth(screenWidth);
 
+    // final buttons = [
+    //   ['C', 'DEL', '÷', '×'],
+    //   ['7', '8', '9', '-'],
+    //   ['4', '5', '6', '+'],
+    //   ['1', '2', '3', '='],
+    //   ['0', '.', ''],
+    // ];
     final buttons = [
-      ['C', 'DEL', '÷', '×'],
-      ['7', '8', '9', '-'],
+      ['7', '8', '9', 'DEL'],
       ['4', '5', '6', '+'],
-      ['1', '2', '3', '='],
-      ['0', '.', ''],
+      ['1', '2', '3', '-'],
+      ['.', '0', '/', 'x'],
+      ['RESET', '='],
     ];
 
     return Container(
       width: finalWidth,
-      height: 128,
+      height: 480,
       alignment: Alignment.bottomRight,
-      padding: const EdgeInsets.all(24),
+
+      padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primaryContainer,
+        borderRadius: BorderRadius.all(Radius.circular(12.0)),
+      ),
+
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -40,7 +56,7 @@ class Keypad extends StatelessWidget {
                     label: label,
                     color: label == '=' ? AppColors.accent : null,
                     onPressed: () {
-                      if (label == 'C')
+                      if (label == 'RESET')
                         controller.clear();
                       else if (label == 'DEL')
                         controller.delete();

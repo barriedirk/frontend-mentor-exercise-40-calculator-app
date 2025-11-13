@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'package:calculator_app/core/utils/calculate_width.dart';
-import '../../../core/constants/app_text_styles.dart';
 import '../controllers/calculator_controller.dart';
 
 class Display extends StatelessWidget {
@@ -20,37 +19,25 @@ class Display extends StatelessWidget {
 
     return Container(
       width: finalWidth,
-      height: 30,
+      height: 128,
       alignment: Alignment.bottomRight,
-      padding: const EdgeInsets.all(4),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         color: theme.colorScheme.primaryContainer,
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text(
-            controller.input,
-            style: GoogleFonts.leagueSpartan(
-              fontSize: 56,
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.primary,
-              letterSpacing: -1,
-            ),
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        alignment: Alignment.bottomRight,
+        child: Text(
+          controller.output,
+          style: GoogleFonts.leagueSpartan(
+            fontSize: 56,
+            fontWeight: FontWeight.bold,
+            color: theme.colorScheme.primary,
+            letterSpacing: -1,
           ),
-          const SizedBox(height: 10),
-          Text(
-            controller.output,
-            style: GoogleFonts.leagueSpartan(
-              fontSize: 56,
-              fontWeight: FontWeight.bold,
-              color: theme.colorScheme.primary,
-              letterSpacing: -1,
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeController extends ChangeNotifier {
   int _currentIndex = 0;
-  late ThemeData _currentTheme;
+  ThemeData _currentTheme = Themes.theme1;
 
   ThemeController() {
     _loadTheme();

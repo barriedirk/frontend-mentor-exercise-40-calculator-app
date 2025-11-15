@@ -1,7 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator_app/core/theme/custom_button_styles.dart';
 
 class Themes {
+  // static const _button1 = CustomButtonStyles(
+  //   button1: ButtonStyle(
+  //     backgroundColor: WidgetStatePropertyAll(Color(0xFFE6E6E6)),
+  //     foregroundColor: WidgetStatePropertyAll(Color(0xFF434A59)),
+  //     side: WidgetStatePropertyAll(BorderSide(color: Color(0xFFB3A497))),
+  //   ),
+  //   button2: ButtonStyle(
+  //     backgroundColor: WidgetStatePropertyAll(Color(0xFF647198)),
+  //     foregroundColor: WidgetStatePropertyAll(Colors.white),
+  //     side: WidgetStatePropertyAll(BorderSide(color: Color(0xFF414E73))),
+  //   ),
+  //   button3: ButtonStyle(
+  //     backgroundColor: WidgetStatePropertyAll(Color(0xFFD03F2F)),
+  //     foregroundColor: WidgetStatePropertyAll(Colors.white),
+  //     side: WidgetStatePropertyAll(BorderSide(color: Color(0xFF93261A))),
+  //   ),
+  // );
+
+  static const _buttons = CustomButtonStyles(
+    buttons: {
+      "button1": ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(Color(0xFFE6E6E6)),
+        foregroundColor: WidgetStatePropertyAll(Color(0xFF434A59)),
+        side: WidgetStatePropertyAll(
+          BorderSide(width: 2, color: Color(0xFFB3A497)),
+        ),
+      ),
+      "button2": ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(Color(0xFF647198)),
+        foregroundColor: WidgetStatePropertyAll(Colors.white),
+        side: WidgetStatePropertyAll(
+          BorderSide(width: 2, color: Color(0xFF414E73)),
+        ),
+      ),
+      "button3": ButtonStyle(
+        backgroundColor: WidgetStatePropertyAll(Color(0xFFD03F2F)),
+        foregroundColor: WidgetStatePropertyAll(Colors.white),
+        side: WidgetStatePropertyAll(
+          BorderSide(width: 2, color: Color(0xFF93261A)),
+        ),
+      ),
+    },
+  );
+
   static final theme1 = ThemeData(
     scaffoldBackgroundColor: const Color(0xFF22252D),
     colorScheme: const ColorScheme.dark(
@@ -15,6 +60,7 @@ class Themes {
       secondary: Color(0xFF4C4F5E),
     ),
     textTheme: GoogleFonts.leagueSpartanTextTheme(),
+    extensions: [_buttons],
   );
 
   static final theme2 = ThemeData(
@@ -30,6 +76,7 @@ class Themes {
       secondary: Color(0xFF4C4F5E),
     ),
     textTheme: GoogleFonts.leagueSpartanTextTheme(),
+    extensions: [_buttons],
   );
 
   static final theme3 = ThemeData(
@@ -45,5 +92,6 @@ class Themes {
       secondary: Color(0xFF4C4F5E),
     ),
     textTheme: GoogleFonts.leagueSpartanTextTheme(),
+    extensions: [_buttons],
   );
 }

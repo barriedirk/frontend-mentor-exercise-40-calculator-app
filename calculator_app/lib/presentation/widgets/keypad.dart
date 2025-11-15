@@ -1,3 +1,4 @@
+import 'package:calculator_app/core/theme/custom_button_styles.dart';
 import 'package:calculator_app/core/utils/calculate_width.dart';
 import 'package:calculator_app/presentation/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
@@ -12,18 +13,12 @@ class Keypad extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeController>().theme;
+    final styles = Theme.of(context).extension<CustomButtonStyles>()!;
 
     final controller = context.read<CalculatorController>();
     final screenWidth = MediaQuery.of(context).size.width;
     final finalWidth = calculateWidth(screenWidth);
 
-    // final buttons = [
-    //   ['C', 'DEL', '÷', '×'],
-    //   ['7', '8', '9', '-'],
-    //   ['4', '5', '6', '+'],
-    //   ['1', '2', '3', '='],
-    //   ['0', '.', ''],
-    // ];
     final buttons = [
       ['7', '8', '9', 'DEL'],
       ['4', '5', '6', '+'],
@@ -54,7 +49,7 @@ class Keypad extends StatelessWidget {
                   if (label.isEmpty) return const SizedBox(width: 70);
                   return CalculatorButton(
                     label: label,
-                    color: label == '=' ? AppColors.accent : null,
+                    buttonStyle: styles["button1"],
                     onPressed: () {
                       if (label == 'RESET')
                         controller.clear();

@@ -1,5 +1,7 @@
+import 'package:calculator_app/core/utils/calculate_width.dart';
 import 'package:flutter/material.dart';
-import '../../../core/constants/app_text_styles.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator_app/core/constants/app_breakpoints.dart';
 
 class CalculatorButton extends StatelessWidget {
   final String label;
@@ -15,33 +17,31 @@ class CalculatorButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final fontSize = screenWidth <= AppBreakpoints.containerWMax ? 30.0 : 40.0;
+    final letterSpacing = screenWidth < AppBreakpoints.containerWMax
+        ? -0.5
+        : -0.7;
+
     return ElevatedButton(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: buttonStyle.backgroundColor?.resolve({}),
-        foregroundColor: buttonStyle.foregroundColor?.resolve({}),
-        side: buttonStyle.side?.resolve({}),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        padding: const EdgeInsets.all(20),
+      style: buttonStyle.copyWith(
+        shape: WidgetStatePropertyAll(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+            side: BorderSide.none,
+          ),
+        ),
+        padding: WidgetStatePropertyAll(const EdgeInsets.all(20)),
       ),
       onPressed: onPressed,
-      child: Text(label, style: AppTextStyles.button),
+      child: Text(
+        label,
+        style: GoogleFonts.leagueSpartan(
+          fontSize: fontSize,
+          fontWeight: FontWeight.bold,
+          letterSpacing: letterSpacing,
+        ),
+      ),
     );
   }
-
-  // Widget build(BuildContext context) {
-  //   final theme = context.watch<ThemeController>().theme;
-  //   final styles = Theme.of(context).extension<CustomButtonStyles>()!;
-  //
-  //   final styleButton = styles["button2"];
-  //
-  //   return ElevatedButton(
-  //     style: ElevatedButton.styleFrom(
-  //       backgroundColor: color ?? AppColors.buttonBackground,
-  //       shape: const CircleBorder(),
-  //       padding: const EdgeInsets.all(20),
-  //     ),
-  //     onPressed: onPressed,
-  //     child: Text(label, style: AppTextStyles.button),
-  //   );
-  // }
 }

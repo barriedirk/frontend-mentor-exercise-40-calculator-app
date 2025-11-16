@@ -17,7 +17,7 @@ class CalculatorPage extends StatelessWidget {
         body: SafeArea(
           child: Center(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: const [
                 SizedBox(height: 30),
                 Header(),

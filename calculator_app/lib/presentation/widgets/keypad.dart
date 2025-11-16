@@ -3,7 +3,6 @@ import 'package:calculator_app/core/utils/calculate_width.dart';
 import 'package:calculator_app/presentation/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../core/constants/app_colors.dart';
 import '../controllers/calculator_controller.dart';
 import 'calculator_button.dart';
 
@@ -45,21 +44,32 @@ class Keypad extends StatelessWidget {
             return Expanded(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: row.map((label) {
-                  if (label.isEmpty) return const SizedBox(width: 70);
-                  return CalculatorButton(
-                    label: label,
-                    buttonStyle: styles["button1"],
-                    onPressed: () {
-                      if (label == 'RESET')
-                        controller.clear();
-                      else if (label == 'DEL')
-                        controller.delete();
-                      else if (label == '=')
-                        controller.calculate();
-                      else
-                        controller.addInput(label);
-                    },
+                children: row.where((label) => label.isNotEmpty).map((label) {
+                  final buttonStyle = label == 'RESET' || label == 'DEL'
+                      ? styles["button2"]
+                      : label == '='
+                      ? styles["button3"]
+                      : styles["button1"];
+
+                  return Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(6),
+                      child: CalculatorButton(
+                        label: label,
+                        buttonStyle: buttonStyle,
+                        onPressed: () {
+                          if (label == 'RESET') {
+                            controller.clear();
+                          } else if (label == 'DEL') {
+                            controller.delete();
+                          } else if (label == '=') {
+                            controller.calculate();
+                          } else {
+                            controller.addInput(label);
+                          }
+                        },
+                      ),
+                    ),
                   );
                 }).toList(),
               ),

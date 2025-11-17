@@ -15,6 +15,7 @@ class CalculatorController extends ChangeNotifier {
 
   void addInput(String value) {
     _input += value;
+
     notifyListeners();
     _saveToPrefs();
   }
@@ -22,6 +23,7 @@ class CalculatorController extends ChangeNotifier {
   void clear() {
     _input = '';
     _output = '0';
+
     notifyListeners();
     _saveToPrefs();
   }
@@ -29,6 +31,7 @@ class CalculatorController extends ChangeNotifier {
   void delete() {
     if (_input.isNotEmpty) {
       _input = _input.substring(0, _input.length - 1);
+
       notifyListeners();
       _saveToPrefs();
     }
@@ -36,6 +39,7 @@ class CalculatorController extends ChangeNotifier {
 
   void calculate() {
     _output = CalculatorLogic.evaluate(_input);
+
     notifyListeners();
     _saveToPrefs();
   }
@@ -43,12 +47,14 @@ class CalculatorController extends ChangeNotifier {
   // to save the state in the browser, ( save in SharedPreferences. )
   Future<void> _saveToPrefs() async {
     final prefs = await SharedPreferences.getInstance();
+
     await prefs.setString('calc_input', _input);
     await prefs.setString('calc_output', _output);
   }
 
   Future<void> _loadFromPrefs() async {
     final prefs = await SharedPreferences.getInstance();
+
     _input = prefs.getString('calc_input') ?? '';
     _output = prefs.getString('calc_output') ?? '0';
     notifyListeners();

@@ -1,7 +1,6 @@
 class CalculatorLogic {
   static String evaluate(String expression) {
     try {
-      // Usa la clase ExpressionEvaluator si luego quieres algo más robusto
       final sanitized = expression.replaceAll('×', '*').replaceAll('÷', '/');
       final result = double.parse(_calculate(sanitized));
 

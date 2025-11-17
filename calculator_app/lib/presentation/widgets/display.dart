@@ -23,14 +23,14 @@ class Display extends StatelessWidget {
       alignment: Alignment.bottomRight,
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: theme.colorScheme.primaryContainer,
+        color: theme.colorScheme.tertiaryContainer,
         borderRadius: BorderRadius.all(Radius.circular(12.0)),
       ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
         alignment: Alignment.bottomRight,
         child: Text(
-          controller.output,
+          controller.input,
           style: GoogleFonts.leagueSpartan(
             fontSize: 56,
             fontWeight: FontWeight.bold,

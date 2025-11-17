@@ -1,3 +1,4 @@
+import 'package:calculator_app/core/theme/custom_button_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,6 +11,7 @@ class ThemeSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = context.watch<ThemeController>().theme;
+    final styles = Theme.of(context).extension<CustomButtonStyles>()!;
     final themeController = context.watch<ThemeController>();
 
     return SizedBox(
@@ -80,7 +82,7 @@ class ThemeSwitch extends StatelessWidget {
                         height: 16,
                         decoration: BoxDecoration(
                           color: isSelected
-                              ? Color(0xffD03F2F)
+                              ? styles["button3"].backgroundColor!.resolve({})
                               : theme.colorScheme.primaryContainer,
                           shape: BoxShape.circle,
                         ),

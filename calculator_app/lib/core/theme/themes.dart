@@ -117,9 +117,9 @@ class Themes {
     scaffoldBackgroundColor: const Color(0xFF17062A),
     colorScheme: const ColorScheme.dark(
       background: Color(0xFF17062A),
-      primary: Color(0xFF00E0D1),
-      primaryContainer: Color(0xFF242D44),
-      secondaryContainer: Color(0xFF22252D),
+      primary: Color(0xFFFFE53D),
+      primaryContainer: Color(0xFF1E0936),
+      secondaryContainer: Color(0xFF1E0936),
       tertiaryContainer: Colors.white,
       surface: Color(0xFF292D36),
       onSurface: Colors.white70,

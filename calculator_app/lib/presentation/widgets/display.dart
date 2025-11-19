@@ -30,7 +30,7 @@ class Display extends StatelessWidget {
         fit: BoxFit.scaleDown,
         alignment: Alignment.bottomRight,
         child: Text(
-          controller.input,
+          controller.output,
           style: GoogleFonts.leagueSpartan(
             fontSize: 56,
             fontWeight: FontWeight.bold,

@@ -9,7 +9,6 @@ class CalculatorLogic {
 
       return format(result.toString());
     } catch (e) {
-      print('Evaluate Error: $e');
       return 'Error';
     }
   }
@@ -23,14 +22,12 @@ class CalculatorLogic {
 
       return formatter.format(double.parse(value.toString()));
     } catch (e) {
-      print('Format Error: $e');
       return 'Error';
     }
   }
 
   static Decimal _calculate(String expr) {
     try {
-      // Regex to match numbers (including decimals) or operators
       final regex = RegExp(r'([0-9.]+|[+\-*/])');
       final matches = regex.allMatches(expr).map((m) => m.group(0)!).toList();
 

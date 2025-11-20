@@ -19,34 +19,43 @@ class CalculatorController extends ChangeNotifier {
 
   void addInput(String value) {
     if (operations.contains(value)) {
-      if (_last == '') {
-        _last = _output;
-      } else {
-        _last = CalculatorLogic.calculateOp(_last, _output, _lastOp);
-      }
-
-      _lastOp = value;
-      _output = CalculatorLogic.format(_last);
-      _lastKey = value;
+      _handleOperator(value);
     } else {
-      if (_lastKey != '' && operations.contains(_lastKey)) {
-        _output = "0";
-        _lastKey = "";
-      }
-
-      if (value == ".") {
-        _output += value;
-      } else if (_output == "0" && value != "0") {
-        _output = value;
-      } else {
-        _output += value;
-
-        _output = CalculatorLogic.format(_output);
-      }
+      _handleDigit(value);
     }
 
     notifyListeners();
     _saveToPrefs();
+  }
+
+  void _handleOperator(String value) {
+    if (_last == '') {
+      _last = _output;
+    } else {
+      _last = CalculatorLogic.calculateOp(_last, _output, _lastOp);
+    }
+
+    _lastOp = value;
+    _output = CalculatorLogic.format(_last);
+    _lastKey = value;
+  }
+
+  void _handleDigit(String value) {
+    if (_lastKey != '' && operations.contains(_lastKey)) {
+      _output = "0";
+      _lastKey = "";
+    }
+
+    if (value == ".") {
+      if (!_output.contains('.')) {
+        _output += value;
+      }
+    } else if (_output == "0" && value != "0") {
+      _output = value;
+    } else {
+      _output += value;
+      _output = CalculatorLogic.format(_output);
+    }
   }
 
   void clear() {

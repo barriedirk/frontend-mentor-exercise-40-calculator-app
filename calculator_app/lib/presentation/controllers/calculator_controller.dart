@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../../core/utils/calculator_logic.dart';
 
 class CalculatorController extends ChangeNotifier {
-  String _last = '0';
+  String _last = '';
   String _output = '0';
   String _lastOp = "";
   String _lastKey = "";
@@ -11,36 +11,27 @@ class CalculatorController extends ChangeNotifier {
   String get last => _last;
   String get output => _output;
 
+  final String operations = "x/-+";
+
   CalculatorController() {
-    _loadFromPrefs(); // ← Cargamos estado guardado al iniciar
+    _loadFromPrefs();
   }
 
   void addInput(String value) {
-    print(value);
+    if (operations.contains(value)) {
+      if (_last == '') {
+        _last = _output;
+      } else {
+        _last = CalculatorLogic.calculateOp(_last, _output, _lastOp);
+      }
 
-    if ("×÷-+".contains(value)) {
-      print("Enter ×÷-+");
-      print(_last);
-      print(_output);
-      _last = CalculatorLogic.calculateOp(_last, _output, _lastOp);
-      print(_last);
       _lastOp = value;
-      _output = _last;
+      _output = CalculatorLogic.format(_last);
       _lastKey = value;
-    } else if (value == '=') {
-      print("Enter =");
-      print(_last);
-      print(_output);
-      _output = CalculatorLogic.calculateOp(_last, _output, _lastOp);
-
-      _lastOp = "";
-      _last = "0";
     } else {
-      if (_lastKey != '' && "×÷-+".contains(_lastKey)) {
+      if (_lastKey != '' && operations.contains(_lastKey)) {
         _output = "0";
         _lastKey = "";
-
-        print("Enter clear");
       }
 
       if (value == ".") {
@@ -48,7 +39,6 @@ class CalculatorController extends ChangeNotifier {
       } else if (_output == "0" && value != "0") {
         _output = value;
       } else {
-        print("Enter acme 2");
         _output += value;
 
         _output = CalculatorLogic.format(_output);
@@ -60,7 +50,7 @@ class CalculatorController extends ChangeNotifier {
   }
 
   void clear() {
-    _last = '0';
+    _last = '';
     _output = '0';
 
     notifyListeners();
@@ -71,13 +61,25 @@ class CalculatorController extends ChangeNotifier {
     if (_output.isNotEmpty || _output != "0") {
       _output = _output.substring(0, _output.length - 1);
 
+      if (_output == "") {
+        _output = "0";
+      }
+
+      _output = CalculatorLogic.format(_output);
+
       notifyListeners();
       _saveToPrefs();
     }
   }
 
   void calculate() {
-    _output = CalculatorLogic.evaluate(_last);
+    _output = CalculatorLogic.format(
+      CalculatorLogic.calculateOp(_last, _output, _lastOp),
+    );
+
+    _lastOp = '';
+    _last = '';
+    _lastKey = '';
 
     notifyListeners();
     _saveToPrefs();

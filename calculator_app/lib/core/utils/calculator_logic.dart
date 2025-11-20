@@ -71,10 +71,10 @@ class CalculatorLogic {
         case '-':
           result = term01 - term02;
           break;
-        case '×':
+        case 'x':
           result = term01 * term02;
           break;
-        case '÷':
+        case '/':
           result = term01 / term02;
           break;
         default:
